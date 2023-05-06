@@ -2,6 +2,7 @@ require 'securerandom'
 require 'faker'
 require 'bson'
 
+# generate random data for benchmark
 class DataService
   OUTPUT_FILE = 'data.txt'
 
