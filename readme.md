@@ -24,6 +24,7 @@ Test clustered index and secondary index performance on clustered collection and
 3. secondary index performance of clustered collection is larger than normal collection.
 ![](./result/sec.png)
 4. I found out some performance issue when using find with multiple id search in clustered collection. related issue [Performance Issue about Clustered Collection : where there are more than one _id search condition, the search would fallback to COLLSCAN](https://jira.mongodb.org/browse/SERVER-76905)
+![](./result/index_issue.png)
 
 > Personal thought:
 Not recommend to use clustered collection now (MongoDB v6.0.5). The insertion performance is not so obvious. In the 
