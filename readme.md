@@ -10,11 +10,15 @@ Write down some benchmark to test the performance of clustered collection.
 
 ## Benchmark
 Test clustered index and secondary index performance on clustered collection and normal collection.
-1. `bm.rb` test the CRD performance on clustered collection.  
-a. insert 1000000 documents into clustered collection  
-b. find 100000 documents collection by _id and email
-c. delete 100000 documents collection by _id and email
-2. `bm_uuid.rb` test whether the uuid as _id will affect the performance of clustered collection.
+1. bm/insert.rb: each time insert 1e6 documents, total insert 2e7 documents into clustered collection and normal collection.
+2. bm/uuid_insert.rb: each time insert 1e6 documents, one with uuid as _id, total insert 1e7 documents into clustered 
+   collections
 
 ## Observation
-1. 
+1. Insert performance of clustered collection is better than normal collection, but not much.
+![](./result/insert.png)
+2. Insert performance of clustered collection with uuid as _id is worse than normal collection.
+![](./result/uuid.png)
+3. secondary index performance of clustered collection is larger than normal collection.
+![](./result/sec.png)
+4. I found out some performance issue when using find with multiple id search in clustered collection. related issue [Performance Issue about Clustered Collection : where there are more than one _id search condition, the search would fallback to COLLSCAN](https://jira.mongodb.org/browse/SERVER-76905)

@@ -40,23 +40,21 @@ class MongoRepo
   def batch_search(collection, data)
     exec_func = lambda do |slice_data|
       slice_data.each do |d|
-        @client[collection].find(d).to_a
+        @client[collection].find(d)
       end
     end
 
     run_in_parallel(data, exec_func)
   end
 
-  def batch_delete(collection, ids, emails)
-    data = ids || emails
+  def batch_delete(collection, query)
     exec_func = lambda do |slice_data|
       slice_data.each do |data|
-        next @client[collection].delete_one(_id: data) unless data.nil?
-        @client[collection].delete_one(email: data)
+        @client[collection].delete(data)
       end
     end
 
-    run_in_parallel(data, exec_func)
+    run_in_parallel(query, exec_func)
   end
 
   private
@@ -64,7 +62,6 @@ class MongoRepo
   def prepare_normal_collection
     @client[USERS].drop
     @client[USERS].create
-    # bm_secondary_index(USERS)
   end
 
   def run_in_parallel(data, exec_func)

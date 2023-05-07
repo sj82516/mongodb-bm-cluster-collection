@@ -36,19 +36,19 @@ class BenchmarkFramework
 
     generate_data do |control_data, experiment_data|
       Benchmark.bm do |x|
-        control_result = x.report(@control_name) do
-          experiment_func(@repo, @control_collection, control_data)
-        end
-        control_results << control_result.real
 
         experiment_result = x.report(@experiment_name) do
           experiment_func(@repo, @experiment_collection, experiment_data)
         end
         experiment_results << experiment_result.real
+        control_result = x.report(@control_name) do
+          experiment_func(@repo, @control_collection, control_data)
+        end
+        control_results << control_result.real
       end
     end
 
-    output_bm_result(OUTPUT_FILE_NAME, control_results, experiment_results)
+    output_bm_result(File.join(__dir__, '../result' ,@output_file_name), control_results, experiment_results)
   end
 
   def pre_run

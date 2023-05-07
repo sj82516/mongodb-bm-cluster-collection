@@ -6,7 +6,7 @@
 require_relative './framework'
 require_relative '../utils/service'
 
-$total = 1e7
+$total = 1e6
 $page_size = 1e5
 
 # experiment _id for cluster collection

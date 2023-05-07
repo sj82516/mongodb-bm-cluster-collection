@@ -1,16 +1,19 @@
 import json
+import sys
 import matplotlib.pyplot as plt
 
 # Load data from JSON file
 # read filename from argv
 
-with open('uuid_results.json', 'r') as f:
+print(sys.argv)
+
+with open(sys.argv[1], 'r') as f:
     data = json.load(f)
 
 # Extract data for line chart
-x = range(1, len(data['control_results']) + 1)
-y1 = data['control_results']
-y2 = data['experiment_results']
+x = range(1, len(data['control_result']) + 1)
+y1 = data['control_result']
+y2 = data['experiment_result']
 
 # Create line chart
 plt.plot(x, y1, label='control')
