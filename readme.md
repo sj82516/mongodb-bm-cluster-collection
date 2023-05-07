@@ -25,8 +25,15 @@ Test clustered index and secondary index performance on clustered collection and
 ![](./result/sec.png)
 4. I found out some performance issue when using find with multiple id search in clustered collection. related issue [Performance Issue about Clustered Collection : where there are more than one _id search condition, the search would fallback to COLLSCAN](https://jira.mongodb.org/browse/SERVER-76905)
 
-## Conclusion
+> Personal thought:
 Not recommend to use clustered collection now (MongoDB v6.0.5). The insertion performance is not so obvious. In the 
 other 
 hand, there 
 are bug in clustered collection.
+
+## How to run
+1. Install MongoDB 6.0.5
+2. Install ruby 3.2.2
+3. Run `bundle install`
+4. Run `$ ruby utils/run.rb` to generate test data
+5. Run benchmark script under bm folder, such as `$ ruby bm/insert.rb`
