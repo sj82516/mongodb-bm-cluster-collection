@@ -50,7 +50,7 @@ class MongoRepo
   def batch_delete(collection, query)
     exec_func = lambda do |slice_data|
       slice_data.each do |data|
-        @client[collection].delete(data)
+        @client[collection].delete_many(data)
       end
     end
 
